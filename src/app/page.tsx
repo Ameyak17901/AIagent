@@ -1,94 +1,19 @@
-"use client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+import HomeView from "@/modules/home/ui/home-view";
+import { redirect } from "next/navigation";
 
-import { useState } from "react";
+const Page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export default function Home() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const { data: session } = authClient.useSession();
-
-  const handleSubmit = async () => {
-    await authClient.signUp.email(
-      {
-        name,
-        email,
-        password,
-      },
-      {
-        onError: () => {
-          alert("Something went wrong");
-        },
-        onSuccess: () => {
-          alert("Success");
-        },
-      }
-    );
-  };
-  const onLogin = async () => {
-    await authClient.signIn.email(
-      {
-        email,
-        password,
-      },
-      {
-        onError: () => {
-          alert("Something went wrong");
-        },
-        onSuccess: () => {
-          alert("Success");
-        },
-      }
-    );
-  };
-
-  if (session) {
-    return (
-      <div className="flex flex-col p-4 gap-y-4">
-        <p>Logged in as {session.user.name}</p>
-        <Button onClick={() => authClient.signOut()}>Sign out</Button>
-      </div>
-    );
+  if (!session) {
+    redirect("/sign-in");
   }
 
-  return (
-    <div className="p-4 flex flex-col gap-y-4">
-      <Button onClick={onLogin}>Login</Button>
-      <Input
-        placeholder="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        placeholder="password"
-        value={password}
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button onClick={handleSubmit}>Submit</Button>
-      <div className="p-4 flex flex-col gap-y-4">
-        <Input
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          placeholder="password"
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button onClick={onLogin}>Submit</Button>
-      </div>
-    </div>
-  );
-}
+  return <HomeView />;
+};
+
+export default Page;
