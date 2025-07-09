@@ -12,8 +12,8 @@ export const DashboardNavbar = () => {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      e.preventDefault();
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
         setCommandOpen((open) => !open);
       }
     };

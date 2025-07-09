@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Separator } from "@/components/ui/separator";
 import {
@@ -17,6 +17,7 @@ import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { DashboardUserButton } from "@/modules/dashboard/ui/components/dashboard-user-button";
+import { usePathname } from "next/navigation";
 
 const firstSection = [
   {
@@ -40,7 +41,7 @@ const secondSection = [
 ];
 
 export const DashboardSidebar = () => {
-  const pathname = "/meetings";
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarHeader className="text-sidebar-accent-foreground">
