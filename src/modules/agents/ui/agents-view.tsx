@@ -2,8 +2,8 @@
 
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
-import { ResponsiveDialog } from "@/components/response-dialog";
-import { Button } from "@/components/ui/button";
+// import { ResponsiveDialog } from "@/components/response-dialog";
+// import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -13,7 +13,7 @@ export const AgentsView = () => {
 
   return (
     <div>
-      <ResponsiveDialog
+      {/* <ResponsiveDialog
         title="Responsive test"
         description="This is responsive description"
         open
@@ -22,7 +22,7 @@ export const AgentsView = () => {
         <div className="flex flex-col">
           <Button>Close</Button>
         </div>
-      </ResponsiveDialog>
+      </ResponsiveDialog> */}
       {JSON.stringify(data, null, 2)}
     </div>
   );
