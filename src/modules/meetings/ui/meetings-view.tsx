@@ -10,7 +10,7 @@ export const MeetingsView = () => {
 
   const { data } = useQuery(trpc.meetings.getMany.queryOptions({}));
 
-  return <div>{JSON.stringify(data)}</div>;
+  return <div>TODO: add meetings data table</div>;
 };
 
 export const MeetingsLoadingState = () => {
